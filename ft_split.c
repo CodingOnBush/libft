@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momrane <momrane@student.42.fr>            +#+  +:+       +#+        */
+/*   By: allblue <allblue@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 08:27:35 by momrane           #+#    #+#             */
-/*   Updated: 2023/11/17 20:06:15 by momrane          ###   ########.fr       */
+/*   Updated: 2024/01/02 10:36:13 by allblue          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,16 @@ static int	ft_nb_words(char const *s, char c)
 {
 	int	count;
 	int	i;
-	int	flag;
 
 	count = 0;
 	i = 0;
-	flag = 0;
 	while (s[i] != '\0')
 	{
 		if (s[i] != c)
 		{
-			flag = 1;
 			count++;
 			while (s[i] != c && s[i] != '\0')
 				i++;
-			flag = 0;
 		}
 		else
 			i++;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momrane <momrane@student.42.fr>            +#+  +:+       +#+        */
+/*   By: allblue <allblue@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 07:06:13 by momrane           #+#    #+#             */
-/*   Updated: 2023/11/16 14:03:48 by momrane          ###   ########.fr       */
+/*   Updated: 2024/01/02 10:35:51 by allblue          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,10 @@
 
 char	*ft_strrchr(const char *s, int c)
 {
-	int				i;
 	char			*ptr;
 	char			*res;
 	unsigned char	val;
 
-	i = 0;
 	ptr = (char *)s;
 	res = NULL;
 	val = (unsigned char)c;
@@ -28,7 +26,6 @@ char	*ft_strrchr(const char *s, int c)
 		if (*ptr == val)
 			res = ptr;
 		ptr++;
-		i++;
 	}
 	if (res != NULL)
 		return (res);
