@@ -5,104 +5,94 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: allblue <allblue@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/10 08:27:35 by momrane           #+#    #+#             */
-/*   Updated: 2024/01/02 10:36:13 by allblue          ###   ########.fr       */
+/*   Created: 2023/12/17 13:41:43 by momrane           #+#    #+#             */
+/*   Updated: 2024/01/02 10:52:26 by allblue          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h" 
+#include "libft.h"
 
-static int	ft_nb_words(char const *s, char c)
+static void	*ft_free_array(char **out, int i)
 {
-	int	count;
-	int	i;
-
-	count = 0;
-	i = 0;
-	while (s[i] != '\0')
+	while (i > 0)
 	{
-		if (s[i] != c)
-		{
-			count++;
-			while (s[i] != c && s[i] != '\0')
-				i++;
-		}
-		else
-			i++;
+		i--;
+		free(out[i]);
 	}
-	return (count);
+	free(out);
+	return (NULL);
 }
 
-static char	*ft_strndup(char const *src, int n)
+static int	ft_count_words(const char *str, char sep)
 {
-	char	*res;
-	int		i;
+	int	out;
 
-	if (!src)
-		return (NULL);
-	res = (char *)malloc(sizeof(char) * (n + 1));
-	if (!res)
-		return (NULL);
-	i = 0;
-	while (i < n)
+	out = 0;
+	while (*str)
 	{
-		res[i] = src[i];
-		i++;
+		while (*str == sep)
+			str++;
+		if (*str != sep && *str != '\0')
+			out++;
+		while (*str != sep && *str != '\0')
+			str++;
 	}
-	res[i] = '\0';
-	return (res);
+	return (out);
 }
 
-static int	ft_wordlen(char const *start, char c)
+static int	ft_get_wlen(const char *str, char sep)
 {
-	int	i;
-
-	i = 0;
-	while (start[i] != '\0' && start[i] != c)
-		i++;
-	return (i);
+	if (!ft_strchr(str, sep))
+		return (ft_strlen(str));
+	else
+		return (ft_strchr(str, sep) - str);
 }
+
+
 
 char	**ft_split(char const *s, char c)
 {
-	char	**res;
-	int		words;
+	char	**out;
 	int		i;
-	int		j;
 
 	if (!s)
 		return (NULL);
-	words = ft_nb_words(s, c);
-	res = malloc((words + 1) * sizeof(char *));
-	if (!res)
+	out = malloc((ft_count_words(s, c) + 1) * sizeof(char *));
+	if (!out)
 		return (NULL);
 	i = 0;
-	j = 0;
-	while (s[i] != '\0')
+	while (*s)
 	{
-		if (s[i] != c)
+		while (*s == c)
+			s++;
+		if (*s)
 		{
-			res[j++] = ft_strndup(&s[i], ft_wordlen(&s[i], c));
-			i = i + ft_wordlen(&s[i], c);
-		}
-		else
+			out[i] = ft_substr(s, 0, ft_get_wlen(s, c));
+			if (!out[i])
+				return (ft_free_array(out, i));
 			i++;
+			s += ft_get_wlen(s, c);
+		}
 	}
-	res[j] = 0;
-	return (res);
+	out[i] = NULL;
+	return (out);
 }
 
 // #include <stdio.h>
 
 // int	main(void)
 // {
-// 	char *str = "This is a test string";
-// 	char **result = ft_split(str, ' ');
+//  	char	**result;
+// 	char	*str;
+//  	int		i;
 
-// 	int i = 0;
-// 	while (result[i] != NULL) {
-// 		printf("%s\n", result[i]);
-// 		i++;
-// 	}
+// 	str = "1 2 3 4 5";
+// 	result = ft_split(str, ' ');
+// 	i = 0;
+//  	while (result[i] != NULL) {
+//  		printf("%s\n", result[i]);
+//  		i++;
+//  	}
+// 	ft_free_array(result, i);
 // 	return (0);
 // }
