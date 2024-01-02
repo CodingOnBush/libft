@@ -11,7 +11,8 @@
 # **************************************************************************** #
 
 AR =	ar rcs
-CC = 	cc -Wall -Werror -Wextra
+CC = 	cc
+FLAGS = -Wall -Werror -Wextra
 BIN =	./bin
 NAME =	libft.a
 SRCS =	ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c \
@@ -23,21 +24,21 @@ SRCS =	ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c \
 		ft_strjoin.c ft_strtrim.c ft_split.c ft_itoa.c \
 		ft_strmapi.c ft_striteri.c ft_putchar_fd.c \
 		ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c
-OBJS = 	$(patsubst %.c,bin/%.o,$(SRCS))
+OBJS = 	$(patsubst %.c,$(BIN)/%.o,$(SRCS))
 
 SRCS_BONUS =	ft_lstnew.c ft_lstadd_front.c ft_lstsize.c \
 				ft_lstlast.c ft_lstadd_back.c ft_lstdelone.c \
 				ft_lstclear.c ft_lstiter.c ft_lstmap.c
-OBJS_BONUS =	$(patsubst %.c,bin/%.o,$(SRCS_BONUS))
+OBJS_BONUS =	$(patsubst %.c,$(BIN)/%.o,$(SRCS_BONUS))
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
 	$(AR) $@ $^
 
-bin/%.o: %.c $(HEADER)
+$(BIN)%.o: %.c $(HEADER)
 	@mkdir -p $(dir $@)
-	$(CC) -c $< -o $@
+	$(CC) $(FLAGS) -c $< -o $@
 
 bonus: $(OBJS_BONUS)
 	$(AR) $(NAME) $^
