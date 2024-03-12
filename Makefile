@@ -6,7 +6,7 @@
 #    By: momrane <momrane@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/17 15:35:38 by momrane           #+#    #+#              #
-#    Updated: 2024/03/12 16:34:40 by momrane          ###   ########.fr        #
+#    Updated: 2024/03/12 16:35:20 by momrane          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ all: $(NAME)
 
 # Creating archive
 $(NAME): $(OBJ)
-	$(AR) $@ $^
+	@$(AR) $@ $^
 
 # Linking
 $(BIN_DIR)/%.o: $(SRC_DIR)/%.c $(HEADER)
