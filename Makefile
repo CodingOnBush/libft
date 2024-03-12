@@ -6,11 +6,11 @@
 #    By: momrane <momrane@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/17 15:35:38 by momrane           #+#    #+#              #
-#    Updated: 2024/03/12 16:07:16 by momrane          ###   ########.fr        #
+#    Updated: 2024/03/12 16:34:40 by momrane          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-# 
+# Archive name
 NAME	:=	libft.a
 
 # Directories
@@ -40,15 +40,15 @@ $(NAME): $(OBJ)
 # Linking
 $(BIN_DIR)/%.o: $(SRC_DIR)/%.c $(HEADER)
 	@mkdir -p $(dir $@)
-	$(CC) $(FLAGS) -c $< -o $@
+	@$(CC) $(FLAGS) -c $< -o $@
 
 # Clean binaries
 clean:
-	rm -rf $(BIN_DIR)
+	@rm -rf $(BIN_DIR)
 
 # Clean binaries and libraries
 fclean: clean
-	rm -rf $(NAME)
+	@rm -rf $(NAME)
 
 # remake
 re: fclean all
